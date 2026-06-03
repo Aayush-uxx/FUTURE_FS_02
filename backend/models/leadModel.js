@@ -11,7 +11,7 @@ const leadSchema = mongoose.Schema(
     },
     source: {
       type: String,
-      enum: ["Website", "Referral", "social"],
+      enum: ["website", "referral", "social"],
     },
     status: {
       type: String,
