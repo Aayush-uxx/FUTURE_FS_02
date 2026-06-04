@@ -4,6 +4,7 @@ import cors from "cors";
 import dbCon from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
 import leadRoute from "./routes/leadRoutes.js";
+import noteRoute from "./routes/noteRoutes.js";
 dotenv.config();
 dbCon();
 
@@ -12,6 +13,7 @@ const app = express();
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api/leads", leadRoute);
+app.use("/api/notes", noteRoute);
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
