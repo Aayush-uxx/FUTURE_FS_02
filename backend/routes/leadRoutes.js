@@ -5,11 +5,12 @@ import {
   getLeadById,
   updateLead,
 } from "../controllers/leadController.js";
+import validToken from "../middleware/authMiddleware.js";
 import express from "express";
 const router = express.Router();
-router.post("/createLead", createLead);
-router.get("/getAllLead", getAllLead);
-router.get("/getLeadById/:id", getLeadById);
-router.put("/updateLead/:id", updateLead);
-router.delete("/deleteLead/:id", deleteLead);
+router.post("/createLead", validToken, createLead);
+router.get("/getAllLead", validToken, getAllLead);
+router.get("/getLeadById/:id", validToken, getLeadById);
+router.put("/updateLead/:id", validToken, updateLead);
+router.delete("/deleteLead/:id", validToken, deleteLead);
 export default router;
