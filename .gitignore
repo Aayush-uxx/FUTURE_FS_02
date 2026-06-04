@@ -36,3 +36,16 @@ backend/uploads/
 # Frontend specific
 frontend/build/
 frontend/.env.local
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# Backend
+backend/node_modules/
+backend/.env
+
+# Common
+.DS_Store
+Thumbs.db
+*.log
