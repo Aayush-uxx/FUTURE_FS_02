@@ -2,7 +2,15 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "../context/AuthContext";
-import { LayoutDashboard, CheckCircle2, ListTodo, UserPlus, LogIn, Mail, Lock } from "lucide-react";
+import {
+  LayoutDashboard,
+  CheckCircle2,
+  ListTodo,
+  UserPlus,
+  LogIn,
+  Mail,
+  Lock,
+} from "lucide-react";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -39,10 +47,12 @@ function Login() {
             <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
               <LayoutDashboard className="text-white size-8" />
             </div>
-            <h1 className="text-4xl font-bold text-white mb-4">Welcome Back!</h1>
+            <h1 className="text-4xl font-bold text-white mb-4">
+              Welcome Back!
+            </h1>
             <p className="text-white/80 text-lg">
-              Access your lead management dashboard to track, organize, and grow your customer
-              relationships.
+              Access your lead management dashboard to track, organize, and grow
+              your customer relationships.
             </p>
           </div>
           <div className="space-y-4">
@@ -71,7 +81,9 @@ function Login() {
       <div className="flex-1 flex items-center justify-center p-6 sm:p-8 bg-brand-bg min-h-screen lg:min-h-0">
         <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 sm:p-8">
           <div className="text-center mb-6 sm:mb-8">
-            <h2 className="text-2xl sm:text-3xl font-bold text-brand-primary">Sign In</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-brand-primary">
+              Sign In
+            </h2>
             <p className="text-gray-500 mt-2 text-sm sm:text-base">
               Enter your credentials to continue
             </p>
@@ -91,7 +103,9 @@ function Login() {
 
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
             <div>
-              <label className="block text-sm font-semibold mb-2 text-brand-primary">Email</label>
+              <label className="block text-sm font-semibold mb-2 text-brand-primary">
+                Email
+              </label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3.5 size-4 text-gray-400" />
                 <input
@@ -106,7 +120,9 @@ function Login() {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold mb-2 text-brand-primary">Password</label>
+              <label className="block text-sm font-semibold mb-2 text-brand-primary">
+                Password
+              </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-3.5 size-4 text-gray-400" />
                 <input
@@ -133,7 +149,10 @@ function Login() {
           <div className="text-center mt-6 pt-4 border-t border-gray-100">
             <p className="text-sm text-brand-secondary">
               Don&apos;t have an account?{" "}
-              <Link to="/register" className="font-semibold text-brand-accent hover:underline">
+              <Link
+                to="/register"
+                className="font-semibold text-brand-accent hover:underline"
+              >
                 Create Account
               </Link>
             </p>

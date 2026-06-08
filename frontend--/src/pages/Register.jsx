@@ -35,8 +35,12 @@ function Register() {
           <div className="w-12 h-12 bg-brand-primary/10 rounded-xl flex items-center justify-center mx-auto mb-4">
             <UserPlus className="text-brand-primary size-6" />
           </div>
-          <h1 className="text-2xl font-bold text-brand-primary">Create Account</h1>
-          <p className="text-sm text-gray-500 mt-2">Register to manage your leads</p>
+          <h1 className="text-2xl font-bold text-brand-primary">
+            Create Account
+          </h1>
+          <p className="text-sm text-gray-500 mt-2">
+            Register to manage your leads
+          </p>
         </div>
 
         {message && (
@@ -53,7 +57,9 @@ function Register() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1 text-brand-primary">Full Name</label>
+            <label className="block text-sm font-medium mb-1 text-brand-primary">
+              Full Name
+            </label>
             <div className="relative">
               <User className="absolute left-3 top-2.5 size-4 text-gray-400" />
               <input
@@ -68,7 +74,9 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-brand-primary">Email</label>
+            <label className="block text-sm font-medium mb-1 text-brand-primary">
+              Email
+            </label>
             <div className="relative">
               <Mail className="absolute left-3 top-2.5 size-4 text-gray-400" />
               <input
@@ -83,7 +91,9 @@ function Register() {
           </div>
 
           <div>
-            <label className="block text-sm font-medium mb-1 text-brand-primary">Password</label>
+            <label className="block text-sm font-medium mb-1 text-brand-primary">
+              Password
+            </label>
             <div className="relative">
               <Lock className="absolute left-3 top-2.5 size-4 text-gray-400" />
               <input
@@ -110,7 +120,10 @@ function Register() {
         <div className="text-center mt-6 pt-4 border-t border-gray-100">
           <p className="text-sm text-brand-secondary">
             Already have an account?{" "}
-            <Link to="/login" className="font-medium text-brand-accent hover:underline">
+            <Link
+              to="/login"
+              className="font-medium text-brand-accent hover:underline"
+            >
               Login here
             </Link>
           </p>

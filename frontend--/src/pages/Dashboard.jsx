@@ -2,18 +2,18 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import { toast } from "sonner";
-import { 
-  Users, 
-  BarChart3, 
-  LogOut, 
-  Plus, 
-  Trash2, 
+import {
+  Users,
+  BarChart3,
+  LogOut,
+  Plus,
+  Trash2,
   LayoutDashboard,
   User,
   Mail,
   Link2,
   Phone,
-  CheckCircle2
+  CheckCircle2,
 } from "lucide-react";
 
 function Dashboard() {
@@ -139,7 +139,9 @@ function Dashboard() {
             <div className="border-t border-white/20 pt-4">
               <div className="flex items-center gap-3 mb-3">
                 <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm">{user?.name?.charAt(0)}</span>
+                  <span className="text-white text-sm">
+                    {user?.name?.charAt(0)}
+                  </span>
                 </div>
                 <div>
                   <p className="text-white text-sm font-medium">{user?.name}</p>
@@ -183,29 +185,48 @@ function Dashboard() {
                 <table className="w-full">
                   <thead className="bg-brand-primary">
                     <tr>
-                      <th className="text-left p-4 text-white font-semibold">Name</th>
-                      <th className="text-left p-4 text-white font-semibold">Email</th>
-                      <th className="text-left p-4 text-white font-semibold">Source</th>
-                      <th className="text-left p-4 text-white font-semibold">Status</th>
-                      <th className="text-left p-4 text-white font-semibold">Actions</th>
+                      <th className="text-left p-4 text-white font-semibold">
+                        Name
+                      </th>
+                      <th className="text-left p-4 text-white font-semibold">
+                        Email
+                      </th>
+                      <th className="text-left p-4 text-white font-semibold">
+                        Source
+                      </th>
+                      <th className="text-left p-4 text-white font-semibold">
+                        Status
+                      </th>
+                      <th className="text-left p-4 text-white font-semibold">
+                        Actions
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {loading ? (
                       <tr>
-                        <td colSpan="5" className="text-center p-8 text-gray-500">
+                        <td
+                          colSpan="5"
+                          className="text-center p-8 text-gray-500"
+                        >
                           Loading leads...
                         </td>
                       </tr>
                     ) : leads.length === 0 ? (
                       <tr>
-                        <td colSpan="5" className="text-center p-8 text-gray-500">
+                        <td
+                          colSpan="5"
+                          className="text-center p-8 text-gray-500"
+                        >
                           No leads yet. Create your first lead!
                         </td>
                       </tr>
                     ) : (
                       leads.map((lead) => (
-                        <tr key={lead._id} className="border-b hover:bg-gray-50">
+                        <tr
+                          key={lead._id}
+                          className="border-b hover:bg-gray-50"
+                        >
                           <td className="p-4 font-medium">{lead.name}</td>
                           <td className="p-4 text-gray-600">{lead.email}</td>
                           <td className="p-4">
@@ -216,8 +237,12 @@ function Dashboard() {
                           <td className="p-4">
                             <select
                               value={lead.status}
-                              onChange={(e) => handleUpdateStatus(lead._id, e.target.value)}
-                              className={`px-3 py-1 rounded-full text-sm font-medium border-0 cursor-pointer ${getStatusColor(lead.status)}`}
+                              onChange={(e) =>
+                                handleUpdateStatus(lead._id, e.target.value)
+                              }
+                              className={`px-3 py-1 rounded-full text-sm font-medium border-0 cursor-pointer ${getStatusColor(
+                                lead.status
+                              )}`}
                             >
                               <option value="new">New</option>
                               <option value="contacted">Contacted</option>
@@ -247,7 +272,9 @@ function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Total Leads</p>
-                    <p className="text-3xl font-bold text-brand-primary">{stats.total}</p>
+                    <p className="text-3xl font-bold text-brand-primary">
+                      {stats.total}
+                    </p>
                   </div>
                   <Users className="size-8 text-brand-primary opacity-20" />
                 </div>
@@ -256,7 +283,9 @@ function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">New</p>
-                    <p className="text-3xl font-bold text-blue-600">{stats.new}</p>
+                    <p className="text-3xl font-bold text-blue-600">
+                      {stats.new}
+                    </p>
                   </div>
                   <Plus className="size-8 text-blue-600 opacity-20" />
                 </div>
@@ -265,7 +294,9 @@ function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Contacted</p>
-                    <p className="text-3xl font-bold text-yellow-600">{stats.contacted}</p>
+                    <p className="text-3xl font-bold text-yellow-600">
+                      {stats.contacted}
+                    </p>
                   </div>
                   <Phone className="size-8 text-yellow-600 opacity-20" />
                 </div>
@@ -274,7 +305,9 @@ function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Converted</p>
-                    <p className="text-3xl font-bold text-green-600">{stats.converted}</p>
+                    <p className="text-3xl font-bold text-green-600">
+                      {stats.converted}
+                    </p>
                   </div>
                   <CheckCircle2 className="size-8 text-green-600 opacity-20" />
                 </div>
@@ -288,12 +321,16 @@ function Dashboard() {
         <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
             <div className="p-6 border-b">
-              <h2 className="text-xl font-bold text-brand-primary">Add New Lead</h2>
+              <h2 className="text-xl font-bold text-brand-primary">
+                Add New Lead
+              </h2>
             </div>
             <form onSubmit={handleAddLead}>
               <div className="p-6 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-1">Name *</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Name *
+                  </label>
                   <div className="relative">
                     <User className="absolute left-3 top-2.5 size-4 text-gray-400" />
                     <input
@@ -301,13 +338,17 @@ function Dashboard() {
                       required
                       className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition"
                       value={newLead.name}
-                      onChange={(e) => setNewLead({ ...newLead, name: e.target.value })}
+                      onChange={(e) =>
+                        setNewLead({ ...newLead, name: e.target.value })
+                      }
                       placeholder="Enter name"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Email *</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Email *
+                  </label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-2.5 size-4 text-gray-400" />
                     <input
@@ -315,19 +356,25 @@ function Dashboard() {
                       required
                       className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition"
                       value={newLead.email}
-                      onChange={(e) => setNewLead({ ...newLead, email: e.target.value })}
+                      onChange={(e) =>
+                        setNewLead({ ...newLead, email: e.target.value })
+                      }
                       placeholder="Enter email"
                     />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium mb-1">Source</label>
+                  <label className="block text-sm font-medium mb-1">
+                    Source
+                  </label>
                   <div className="relative">
                     <Link2 className="absolute left-3 top-2.5 size-4 text-gray-400" />
                     <select
                       className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition appearance-none"
                       value={newLead.source}
-                      onChange={(e) => setNewLead({ ...newLead, source: e.target.value })}
+                      onChange={(e) =>
+                        setNewLead({ ...newLead, source: e.target.value })
+                      }
                     >
                       <option value="website">Website</option>
                       <option value="referral">Referral</option>
