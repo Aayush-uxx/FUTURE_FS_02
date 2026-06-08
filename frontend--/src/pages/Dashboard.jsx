@@ -2,6 +2,19 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../context/AuthContext";
 import api from "../services/api";
 import { toast } from "sonner";
+import { 
+  Users, 
+  BarChart3, 
+  LogOut, 
+  Plus, 
+  Trash2, 
+  LayoutDashboard,
+  User,
+  Mail,
+  Link2,
+  Phone,
+  CheckCircle2
+} from "lucide-react";
 
 function Dashboard() {
   const { user, logout } = useAuth();
@@ -87,14 +100,14 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: "#DCAA89" }}>
-      <div className="w-64 fixed h-full" style={{ backgroundColor: "#30525C" }}>
+    <div className="min-h-screen flex bg-brand-bg">
+      <div className="w-64 fixed h-full bg-brand-primary">
         <div className="p-6">
           <div className="flex items-center gap-3 mb-8">
             <div className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center">
-              <span className="text-white text-xl">📋</span>
+              <LayoutDashboard className="text-white size-6" />
             </div>
-            <h1 className="text-white font-bold text-lg">CRM Lead Manager</h1>
+            <h1 className="text-white font-bold text-lg">CRM Manager</h1>
           </div>
 
           <nav className="space-y-2">
@@ -106,7 +119,7 @@ function Dashboard() {
                   : "text-white/70 hover:bg-white/10 hover:text-white"
               }`}
             >
-              <span>👥</span>
+              <Users className="size-5" />
               <span>All Leads</span>
             </button>
             <button
@@ -117,7 +130,7 @@ function Dashboard() {
                   : "text-white/70 hover:bg-white/10 hover:text-white"
               }`}
             >
-              <span>📊</span>
+              <BarChart3 className="size-5" />
               <span>Statistics</span>
             </button>
           </nav>
@@ -137,7 +150,7 @@ function Dashboard() {
                 onClick={logout}
                 className="w-full flex items-center gap-3 px-4 py-2 rounded-lg text-white/70 hover:bg-white/10 hover:text-white transition"
               >
-                <span>🚪</span>
+                <LogOut className="size-5" />
                 <span>Logout</span>
               </button>
             </div>
@@ -147,7 +160,7 @@ function Dashboard() {
 
       <div className="ml-64 flex-1">
         <header className="bg-white shadow-sm px-8 py-4">
-          <h1 className="text-2xl font-bold" style={{ color: "#30525C" }}>
+          <h1 className="text-2xl font-bold text-brand-primary">
             {activeTab === "leads" ? "Lead Management" : "Statistics Overview"}
           </h1>
           <p className="text-gray-500 text-sm">Welcome back, {user?.name}</p>
@@ -159,17 +172,16 @@ function Dashboard() {
               <div className="flex justify-end mb-6">
                 <button
                   onClick={() => setShowAddModal(true)}
-                  className="px-5 py-2.5 text-white rounded-lg font-medium flex items-center gap-2"
-                  style={{ backgroundColor: "#C35627" }}
+                  className="px-5 py-2.5 text-white rounded-lg font-medium flex items-center gap-2 bg-brand-accent hover:opacity-90"
                 >
-                  <span>+</span>
+                  <Plus className="size-5" />
                   Add New Lead
                 </button>
               </div>
 
               <div className="bg-white rounded-xl shadow-sm overflow-hidden">
                 <table className="w-full">
-                  <thead style={{ backgroundColor: "#30525C" }}>
+                  <thead className="bg-brand-primary">
                     <tr>
                       <th className="text-left p-4 text-white font-semibold">Name</th>
                       <th className="text-left p-4 text-white font-semibold">Email</th>
@@ -197,7 +209,7 @@ function Dashboard() {
                           <td className="p-4 font-medium">{lead.name}</td>
                           <td className="p-4 text-gray-600">{lead.email}</td>
                           <td className="p-4">
-                            <span className="px-2 py-1 bg-gray-100 rounded text-sm">
+                            <span className="px-2 py-1 bg-gray-100 rounded text-sm capitalize">
                               {lead.source}
                             </span>
                           </td>
@@ -217,7 +229,7 @@ function Dashboard() {
                               onClick={() => handleDeleteLead(lead._id)}
                               className="text-red-500 hover:text-red-700 transition"
                             >
-                              🗑️
+                              <Trash2 className="size-5" />
                             </button>
                           </td>
                         </tr>
@@ -235,11 +247,9 @@ function Dashboard() {
                 <div className="flex items-center justify-between">
                   <div>
                     <p className="text-gray-500 text-sm">Total Leads</p>
-                    <p className="text-3xl font-bold" style={{ color: "#30525C" }}>
-                      {stats.total}
-                    </p>
+                    <p className="text-3xl font-bold text-brand-primary">{stats.total}</p>
                   </div>
-                  <span className="text-3xl">👥</span>
+                  <Users className="size-8 text-brand-primary opacity-20" />
                 </div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6">
@@ -248,7 +258,7 @@ function Dashboard() {
                     <p className="text-gray-500 text-sm">New</p>
                     <p className="text-3xl font-bold text-blue-600">{stats.new}</p>
                   </div>
-                  <span className="text-3xl">🆕</span>
+                  <Plus className="size-8 text-blue-600 opacity-20" />
                 </div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6">
@@ -257,7 +267,7 @@ function Dashboard() {
                     <p className="text-gray-500 text-sm">Contacted</p>
                     <p className="text-3xl font-bold text-yellow-600">{stats.contacted}</p>
                   </div>
-                  <span className="text-3xl">📞</span>
+                  <Phone className="size-8 text-yellow-600 opacity-20" />
                 </div>
               </div>
               <div className="bg-white rounded-xl shadow-sm p-6">
@@ -266,7 +276,7 @@ function Dashboard() {
                     <p className="text-gray-500 text-sm">Converted</p>
                     <p className="text-3xl font-bold text-green-600">{stats.converted}</p>
                   </div>
-                  <span className="text-3xl">✅</span>
+                  <CheckCircle2 className="size-8 text-green-600 opacity-20" />
                 </div>
               </div>
             </div>
@@ -275,60 +285,68 @@ function Dashboard() {
       </div>
 
       {showAddModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
           <div className="bg-white rounded-xl shadow-xl w-full max-w-md">
             <div className="p-6 border-b">
-              <h2 className="text-xl font-bold" style={{ color: "#30525C" }}>
-                Add New Lead
-              </h2>
+              <h2 className="text-xl font-bold text-brand-primary">Add New Lead</h2>
             </div>
             <form onSubmit={handleAddLead}>
               <div className="p-6 space-y-4">
                 <div>
                   <label className="block text-sm font-medium mb-1">Name *</label>
-                  <input
-                    type="text"
-                    required
-                    className="w-full border rounded-lg p-2"
-                    value={newLead.name}
-                    onChange={(e) => setNewLead({ ...newLead, name: e.target.value })}
-                  />
+                  <div className="relative">
+                    <User className="absolute left-3 top-2.5 size-4 text-gray-400" />
+                    <input
+                      type="text"
+                      required
+                      className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition"
+                      value={newLead.name}
+                      onChange={(e) => setNewLead({ ...newLead, name: e.target.value })}
+                      placeholder="Enter name"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Email *</label>
-                  <input
-                    type="email"
-                    required
-                    className="w-full border rounded-lg p-2"
-                    value={newLead.email}
-                    onChange={(e) => setNewLead({ ...newLead, email: e.target.value })}
-                  />
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-2.5 size-4 text-gray-400" />
+                    <input
+                      type="email"
+                      required
+                      className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition"
+                      value={newLead.email}
+                      onChange={(e) => setNewLead({ ...newLead, email: e.target.value })}
+                      placeholder="Enter email"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-1">Source</label>
-                  <select
-                    className="w-full border rounded-lg p-2"
-                    value={newLead.source}
-                    onChange={(e) => setNewLead({ ...newLead, source: e.target.value })}
-                  >
-                    <option value="website">Website</option>
-                    <option value="referral">Referral</option>
-                    <option value="social">Social Media</option>
-                  </select>
+                  <div className="relative">
+                    <Link2 className="absolute left-3 top-2.5 size-4 text-gray-400" />
+                    <select
+                      className="w-full border rounded-lg p-2 pl-10 focus:ring-2 focus:ring-brand-accent outline-none transition appearance-none"
+                      value={newLead.source}
+                      onChange={(e) => setNewLead({ ...newLead, source: e.target.value })}
+                    >
+                      <option value="website">Website</option>
+                      <option value="referral">Referral</option>
+                      <option value="social">Social Media</option>
+                    </select>
+                  </div>
                 </div>
               </div>
               <div className="p-6 border-t flex gap-3 justify-end">
                 <button
                   type="button"
                   onClick={() => setShowAddModal(false)}
-                  className="px-4 py-2 border rounded-lg hover:bg-gray-50"
+                  className="px-4 py-2 border rounded-lg hover:bg-gray-50 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 text-white rounded-lg"
-                  style={{ backgroundColor: "#C35627" }}
+                  className="px-4 py-2 text-white rounded-lg bg-brand-accent hover:opacity-90 transition"
                 >
                   Add Lead
                 </button>
