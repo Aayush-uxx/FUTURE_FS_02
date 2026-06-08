@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import api from "../services/api";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -10,7 +10,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
-  const login = useAuth();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,10 +20,8 @@ function Login() {
     try {
       const response = await api.post("/auth/login", { email, password });
       const { token, user } = response.data;
-
       login(token, user);
       setMessage(`Welcome back, ${user.name}!`);
-
       setTimeout(() => navigate("/dashboard"), 1000);
     } catch (error) {
       setMessage(error.response?.data?.message || "Login failed");
@@ -33,90 +31,96 @@ function Login() {
   };
 
   return (
-    <div
-      className="min-h-screen flex items-center justify-center px-4"
-      style={{ backgroundColor: "#DCAA89" }}
-    >
-      <div className="w-full max-w-md bg-white rounded-lg shadow-xl p-8">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold" style={{ color: "#30525C" }}>
-            CRM Login
-          </h1>
-          <p className="text-sm text-gray-600 mt-2">
-            Access your lead management dashboard
-          </p>
+    <div className="min-h-screen flex flex-col lg:flex-row">
+      <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-[#30525C] to-[#4C848D] p-12 flex-col justify-center">
+        <div className="max-w-md mx-auto">
+          <div className="mb-8">
+            <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+              <span className="text-3xl">📋</span>
+            </div>
+            <h1 className="text-4xl font-bold text-white mb-4">Welcome Back!</h1>
+            <p className="text-white/80 text-lg">
+              Access your lead management dashboard to track, organize, and grow your customer
+              relationships.
+            </p>
+          </div>
+          <div className="space-y-3">
+            <div className="flex items-center gap-2 text-white/70">
+              <span className="text-green-400">✓</span> Manage Leads
+            </div>
+            <div className="flex items-center gap-2 text-white/70">
+              <span className="text-green-400">✓</span> Track Status
+            </div>
+            <div className="flex items-center gap-2 text-white/70">
+              <span className="text-green-400">✓</span> Add Notes
+            </div>
+          </div>
         </div>
+      </div>
 
-        {message && (
-          <div
-            className={`mb-4 p-3 rounded text-center text-sm ${
-              message.includes("Welcome")
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            {message}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} className="space-y-5">
-          <div>
-            <label
-              className="block text-sm font-medium mb-1"
-              style={{ color: "#30525C" }}
-            >
-              Email
-            </label>
-            <input
-              type="email"
-              className="w-full border rounded-lg p-2.5 focus:outline-none focus:ring-2"
-              style={{ borderColor: "#BFB9B5" }}
-              placeholder="admin@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+      <div className="flex-1 flex items-center justify-center p-6 sm:p-8 bg-[#DCAA89] min-h-screen lg:min-h-0">
+        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-6 sm:p-8">
+          <div className="text-center mb-6 sm:mb-8">
+            <h2 className="text-2xl sm:text-3xl font-bold text-[#30525C]">Sign In</h2>
+            <p className="text-gray-500 mt-2 text-sm sm:text-base">
+              Enter your credentials to continue
+            </p>
           </div>
 
-          <div>
-            <label
-              className="block text-sm font-medium mb-1"
-              style={{ color: "#30525C" }}
+          {message && (
+            <div
+              className={`mb-4 p-3 rounded-xl text-center text-sm ${
+                message.includes("Welcome")
+                  ? "bg-green-100 text-green-700"
+                  : "bg-red-100 text-red-700"
+              }`}
             >
-              Password
-            </label>
-            <input
-              type="password"
-              className="w-full border rounded-lg p-2.5 focus:outline-none focus:ring-2"
-              style={{ borderColor: "#BFB9B5" }}
-              placeholder="••••••"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+              {message}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-[#30525C]">Email</label>
+              <input
+                type="email"
+                className="w-full border border-[#BFB9B5] rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#C35627] transition"
+                placeholder="admin@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-semibold mb-2 text-[#30525C]">Password</label>
+              <input
+                type="password"
+                className="w-full border border-[#BFB9B5] rounded-xl p-3 focus:outline-none focus:ring-2 focus:ring-[#C35627] transition"
+                placeholder="••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-[#C35627] text-white py-3 rounded-xl font-semibold hover:bg-[#D6794D] transition disabled:opacity-50"
+            >
+              {loading ? "Signing in..." : "Sign In"}
+            </button>
+          </form>
+
+          <div className="text-center mt-6 pt-4 border-t border-[#BFB9B5]">
+            <p className="text-sm text-[#4C848D]">
+              Don&apos;t have an account?{" "}
+              <Link to="/register" className="font-semibold text-[#C35627] hover:underline">
+                Create Account
+              </Link>
+            </p>
           </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full text-white py-2.5 rounded-lg font-medium hover:opacity-90 disabled:opacity-50"
-            style={{ backgroundColor: "#C35627" }}
-          >
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
-
-        <div className="text-center mt-6">
-          <p className="text-sm" style={{ color: "#4C848D" }}>
-            Don't have an account?{" "}
-            <Link
-              to="/register"
-              className="font-medium hover:underline"
-              style={{ color: "#C35627" }}
-            >
-              Register here
-            </Link>
-          </p>
         </div>
       </div>
     </div>

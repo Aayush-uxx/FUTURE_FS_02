@@ -19,8 +19,7 @@ function Register() {
     try {
       await api.post("/auth/register", { name, email, password });
       setMessage("Account created! Redirecting to login...");
-
-      setTimeout(() => navigate("/auth/login"), 2000);
+      setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
       setMessage(error.response?.data?.message || "Registration failed");
     } finally {
@@ -38,9 +37,7 @@ function Register() {
           <h1 className="text-2xl font-bold" style={{ color: "#30525C" }}>
             Create Account
           </h1>
-          <p className="text-sm text-gray-600 mt-2">
-            Register to manage your leads
-          </p>
+          <p className="text-sm text-gray-600 mt-2">Register to manage your leads</p>
         </div>
 
         {message && (
@@ -85,7 +82,7 @@ function Register() {
               type="email"
               className="w-full border rounded-lg p-2.5 focus:outline-none focus:ring-2"
               style={{ borderColor: "#BFB9B5" }}
-              placeholder="admin@example.com"
+              placeholder="john@example.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
