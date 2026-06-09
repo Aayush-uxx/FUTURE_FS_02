@@ -10,28 +10,17 @@ dotenv.config();
 
 const app = express();
 
-// 1. Manual CORS - Direct Header injection (Must be first)
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-  
-  // Handle Preflight (OPTIONS) immediately
-  if (req.method === "OPTIONS") {
-    return res.status(200).end();
-  }
-  next();
-});
+// Standard CORS middleware
+app.use(cors());
 
-// 2. Body Parser
+// Body Parser
 app.use(express.json());
 
-// 3. Health Check
+// Health Check
 app.get("/ping", (req, res) => res.status(200).json({ message: "API is alive" }));
 
-// 4. Database Middleware (Bypass for OPTIONS)
+// Database Middleware (Wait for DB)
 app.use(async (req, res, next) => {
-  if (req.method === "OPTIONS") return next();
   try {
     await dbCon();
     next();
@@ -40,7 +29,7 @@ app.use(async (req, res, next) => {
   }
 });
 
-// 5. Routes (Removed /api prefix for stability)
+// Routes
 app.use("/auth", authRoute);
 app.use("/leads", leadRoute);
 app.use("/notes", noteRoute);
