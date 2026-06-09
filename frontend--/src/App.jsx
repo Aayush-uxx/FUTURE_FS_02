@@ -13,18 +13,18 @@ function AppRoutes() {
     <Routes>
       <Route
         path="/"
-        element={isAuthenticated ? <Dashboard /> : <Navigate to="/Login" />}
+        element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
       />
       <Route
-        path="/Login"
+        path="/login"
         element={isAuthenticated ? <Navigate to="/" /> : <Login />}
       />
       <Route
-        path="/Register"
+        path="/register"
         element={isAuthenticated ? <Navigate to="/" /> : <Register />}
       />
       <Route
-        path="/Dashboard"
+        path="/dashboard"
         element={isAuthenticated ? <Dashboard /> : <Navigate to="/login" />}
       />
     </Routes>

@@ -13,8 +13,12 @@ const app = express();
 app.use(express.json());
 const allowedOrigins = process.env.CLIENT_URL
   ? process.env.CLIENT_URL.split(",").map((o) => o.trim())
-  : ["http://localhost:5173", "http://localhost:5174"];
-
+  : [
+      "http://localhost:5173",
+      "https://minicrmfront-git-main-aayush-s-projects13.vercel.app",
+    ];
+console.log("CLIENT_URL =", process.env.CLIENT_URL);
+console.log("allowedOrigins =", allowedOrigins);
 app.use(
   cors({
     origin: (origin, callback) => {
