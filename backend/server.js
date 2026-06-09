@@ -10,16 +10,6 @@ dotenv.config();
 
 const app = express();
 
-app.use(express.json());
-
-const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",").map((o) => o.trim())
-  : [
-      "http://localhost:5173",
-      "http://localhost:5174",
-      "https://minicrmfront-git-main-aayush-s-projects13.vercel.app",
-    ];
-
 app.use(
   cors({
     origin: true,
@@ -28,6 +18,8 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+app.use(express.json());
 
 app.use(async (req, res, next) => {
   try {
