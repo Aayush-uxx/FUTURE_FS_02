@@ -13,13 +13,19 @@ const app = express();
 // 1. CORS MUST be first to handle preflight OPTIONS requests
 app.use(
   cors({
-    origin: true,
+    origin: (origin, callback) => callback(null, true),
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
     optionsSuccessStatus: 200,
   })
 );
+
+// Logging middleware to see incoming requests in Vercel logs
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url} - Origin: ${req.headers.origin}`);
+  next();
+});
 
 // 2. Body Parser
 app.use(express.json());
