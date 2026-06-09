@@ -17,22 +17,8 @@ const allowedOrigins = process.env.CLIENT_URL
       "http://localhost:5173",
       "https://minicrmfront-git-main-aayush-s-projects13.vercel.app",
     ];
-console.log("CLIENT_URL =", process.env.CLIENT_URL);
-console.log("allowedOrigins =", allowedOrigins);
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+
+app.use(cors());
 
 app.use(async (req, res, next) => {
   try {
